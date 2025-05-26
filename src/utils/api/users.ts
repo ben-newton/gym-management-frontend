@@ -3,7 +3,7 @@ import type { User } from '@/types';
 
 export const users = {
     getAll: async (): Promise<User[]> => {
-        const { data } = await api.get<User[]>('/users');
+        const { data } = await api.get<User[]>('/api/v1/users');
         return data;
     },
 
@@ -14,7 +14,7 @@ export const users = {
         first_name: string;
         last_name: string;
     }): Promise<User> => {
-        const { data } = await api.post<User>('/users', userData);
+        const { data } = await api.post<User>('/api/v1/users', userData);
         return data;
     },
 }; 
