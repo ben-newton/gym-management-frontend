@@ -26,12 +26,12 @@ export function useClass(id: number) {
   });
 }
 
-export function useSchedules() {
+export function useSchedules(options?: { includeHistory?: boolean }) {
   const { user } = useAuth();
   const token = localStorage.getItem('token');
   
   return useQuery({
-    queryKey: ['schedules'],
+    queryKey: ['schedules', options?.includeHistory],
     queryFn: async () => {
       const { data } = await api.get('/api/v1/schedules/', {
         headers: {
@@ -39,7 +39,8 @@ export function useSchedules() {
         },
         params: {
           instructor_id: user?.role === UserRole.INSTRUCTOR ? user.id : undefined,
-          include_details: true
+          include_details: true,
+          include_history: options?.includeHistory ? true : undefined
         }
       });
       return data;
