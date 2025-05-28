@@ -32,4 +32,12 @@ export const classes = {
         const { data } = await api.post<ClassSchedule>('/api/v1/schedules', scheduleData);
         return data;
     },
+
+    deleteSchedule: async (scheduleId: number): Promise<void> => {
+        await api.delete(`/api/v1/schedules/${scheduleId}`);
+    },
+
+    deleteClass: async (classId: number): Promise<void> => {
+        await api.delete(`/api/v1/classes/${classId}`);
+    },
 }; 
